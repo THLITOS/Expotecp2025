@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { sendWelcomeEmail } = require('../utils/mailer');
+const { sendWelcomeEmail } = require('../utils/Mailer');
 
 console.log('Ñ Tipo:', typeof sendWelcomeEmail);
 
