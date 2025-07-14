@@ -1,0 +1,190 @@
+/* Estilo general para los mensajes */
+.message {
+  font-size: 0.9em;
+  margin: 5px 0;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mensajes de éxito (celeste) */
+.success-message {
+  color: #00ADAD;
+  font-size: 0.9em;
+}
+
+/* Mensajes de error (celeste) */
+.error-message {
+  color: #00ADAD;
+  font-size: 0.9em;
+  display: inline-block;
+}
+
+/* Estilos previos, no cambiaron */
+.parentDiv {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Jost', sans-serif;
+  background: linear-gradient(to bottom, #000000, #1F4E79, #000000);
+  width: 100%;
+}
+
+.main {
+  width: 350px;
+  height: 500px;
+  border-radius: 10px;
+  box-shadow: 5px 20px 50px #000;
+  overflow: hidden;
+}
+
+#chk {
+  display: none;
+}
+
+.signup {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+label {
+  color: #ffffff;
+  font-size: 2.8em;
+  justify-content: center;
+  display: flex;
+  margin: 50px;
+  margin-bottom: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .5s ease-in-out;
+}
+
+input {
+  width: 70%;
+  height: 40px;
+  background: #FFFFFF;
+  color: #000;
+  display: block;
+  margin: 20px auto;
+  padding: 0 15px;
+  border: 1px solid #ABABAB;
+  outline: none;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  border: 1px solid #00ADAD;
+  box-shadow: 0 0 8px rgba(0, 173, 173, 0.4);
+}
+
+button {
+  width: 60%;
+  height: 40px;
+  margin: 10px auto;
+  justify-content: center;
+  display: block;
+  color: #fff;
+  background: #00ADAD;
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 30px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  transition: .2s ease-in;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1F4E79;
+}
+
+.login {
+  height: 470px;
+  background: #000000;
+  border-radius: 70% / 10%;
+  transform: translateY(-172px);
+  transition: .8s ease-in-out;
+}
+
+.login label {
+  color: #00ADAD;
+  transform: scale(.6);
+}
+
+#chk:checked ~ .login {
+  transform: translateY(-500px);
+  margin-top: 30px;
+}
+
+#chk:checked ~ .login label {
+  transform: scale(1);
+}
+
+#chk:checked ~ .signup label {
+  transform: scale(.6);
+}
+
+body {
+  overflow-y: auto;
+  background: #000000;
+  color: #ffffff;
+}
+
+.custom-toast {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 16px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+  opacity: 0;
+  transition: opacity 0.5s, bottom 0.5s;
+}
+
+.custom-toast.show {
+  visibility: visible;
+  opacity: 1;
+  animation: fadein-slideup 0.5s forwards, fadeout-slidedown 0.5s 2.5s forwards;
+}
+
+/* Keyframes para la animacion para la animación de entrada (aparece y sube un poco) del toast*/
+@keyframes fadein-slideup {
+  from {
+    bottom: 0px;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+/* Keyframes para la animación de salida (desaparece y baja un poco) del toast */
+@keyframes fadeout-slidedown {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0px;
+    opacity: 0;
+  }
+}

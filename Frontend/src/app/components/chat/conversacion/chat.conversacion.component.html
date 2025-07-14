@@ -1,0 +1,27 @@
+<div class="conversation-view">
+  <div class="messages-container" #messagesScroll>
+    @for (message of selectedChat.messages; track message.id) {
+    <div class="message-wrapper" [ngClass]="{'my-message': message.isMine, 'other-message': !message.isMine}">
+      @if (!message.isMine) {
+      <img [src]="selectedChat.avatarUrl" alt="Avatar" class="message-avatar">
+      }
+      <div class="message-bubble">
+        @if (message.imageUrl) {
+        <img [src]="message.imageUrl" alt="Imagen del mensaje" class="message-image">
+        }
+        <p>{{ message.text }}</p>
+        <span class="message-timestamp">{{ message.timestamp }}</span>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="message-input-area">
+    <input type="text" placeholder="Aa" [(ngModel)]="newMessageText" (keyup.enter)="sendMessage()"
+      class="message-input">
+
+    <button class="input-icon-button emoji-button" (click)="sendMessage()">
+      <span>Enviar</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="chat-panel-header">
+    <div class="header-top">
+        @if (!selectedChat) { <h2>Chats</h2>
+        } @else {
+        <button class="back-button" (click)="goBackToChatList()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-arrow-left">
+                <path d="m12 19-7-7 7-7" />
+                <path d="M19 12H5" />
+            </svg>
+        </button>
+        <div class="current-chat-header">
+            <img [src]="selectedChat.avatarUrl" alt="{{ selectedChat.name }}" class="header-avatar">
+            <div class="header-chat-info">
+                <span class="header-chat-name">{{ selectedChat.name }}</span>
+            </div>
+        </div>
+        }
+        <div class="header-icons">
+            @if (!selectedChat) {
+            <button class="icon-button" (click)="openNewChatModal()"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                    height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil">
+                    <path d="M17 3a2.85 2.85 0 0 0-4 4L7.5 13.5 4 22l8.5-3.5L21 7a2.85 2.85 0 0 0-4-4Z" />
+                </svg></button>
+            } @else {
+            }
+            <button class="icon-button close-button" (click)="closeChatPanel()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-x">
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    @if (!selectedChat) {
+    <div class="search-bar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-search">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+        </svg>
+        <input type="text" placeholder="Buscar en Messenger" [(ngModel)]="searchTerm"
+            (input)="onSearchInputChange($event)">
+    </div>
+    }
+</div>
+
+<div class="chat-content">
+    <div *ngIf="!selectedChat" class="chat-list">
+        <app-chat-item *ngFor="let chat of filteredChats; trackBy: trackByChatId" [chat]="chat"
+            (chatSelected)="selectChat($event)">
+        </app-chat-item>
+    </div>
+
+    <app-chat-conversacion *ngIf="selectedChat" [selectedChat]="selectedChat" (messageSent)="addNewMessage($event)">
+    </app-chat-conversacion>
+</div>
+
+<app-chat-modal *ngIf="showNewChatModal" (close)="closeNewChatModal()" (chatSelected)="onNewChatSelected($event)">
+</app-chat-modal>

@@ -1,0 +1,58 @@
+:host-context(body.obscuro) {
+  background-color: #1c1919;
+  color: white;
+}
+
+:host-context(body.azul) {
+  background-color: #1a2f4d;
+  color: white;
+}
+
+:host-context(body.verde) {
+  background-color: #1a3a25;
+  color: #ffffff;
+}
+
+:host-context(body.rosa) {
+  background-color: #4d1a31;
+  color: #ffffff;
+}
+
+:host-context(body.naranja) {
+  background-color: #4d2f1a;
+  color: #000000;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /*background-color: #040404; */
+  overflow: hidden; /* ¡IMPORTANTE! para evitar scroll extra */
+}
+
+app-navbar {
+  flex-shrink: 0;
+  border-bottom: 1px solid white;
+}
+
+.content-wrapper {
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden; /* Evita que salga scroll no deseado */
+  height: calc(100vh - 70px); /* Altura menos navbar */
+}
+
+app-sidebar {
+  width: 250px;
+  overflow-y: auto;
+  border-right: 1px solid white;
+  height: 100%; /* que ocupe toda la altura disponible */
+}
+
+app-feed {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  height: 100%; /* que ocupe toda la altura disponible */
+}

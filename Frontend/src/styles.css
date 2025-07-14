@@ -1,0 +1,43 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #1c1919; /* tu fondo gris */
+  overflow-x: hidden; /* evita scroll horizontal por barras */
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body.claro {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.obscuro {
+  background-color: #1c1919;
+  color: #ffffff;
+}
+
+body.azul {
+  background-color: #1a2f4d;
+  color: #ffffff;
+}
+
+body.verde {
+  background-color: #1a3a25;
+  color: #ffffff;
+}
+
+body.rosa {
+  background-color: #4d1a31;
+  color: #ffffff;
+}
+
+body.naranja {
+  background-color: #4d2f1a;
+  color: #000000;
+}

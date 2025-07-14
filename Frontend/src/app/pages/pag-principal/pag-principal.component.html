@@ -1,0 +1,24 @@
+<div class="main-container">
+  <!-- Escucha el evento (navegarInicio) del logo -->
+  <app-navbar (navegarInicio)="onSectionSelected('feed')"></app-navbar>
+
+  <div class="content-wrapper">
+    <div class="sidebar-container">
+      <app-sidebar
+        [selectedSection]="selectedSection"
+        (sectionSelected)="onSectionSelected($event)"
+      ></app-sidebar>
+    </div>
+
+    <div class="main-content" style="flex-grow: 1; overflow-y: auto; padding: 20px;">
+      <app-feed *ngIf="selectedSection === 'feed'"></app-feed>
+      <app-comunidad *ngIf="selectedSection === 'comunidades'"></app-comunidad>
+      <app-crear-comunidad *ngIf="selectedSection === 'crearcomunidad'"></app-crear-comunidad>
+      <app-soporte *ngIf="selectedSection === 'soporte'"></app-soporte>
+      <app-tus-comunidades *ngIf="selectedSection === 'TusComunidades'"></app-tus-comunidades>
+      <div *ngIf="selectedSection === 'otro'" style="color: white;">
+        Otra sección
+      </div>
+    </div>
+  </div>
+</div>

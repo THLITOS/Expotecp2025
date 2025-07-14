@@ -1,0 +1,48 @@
+<div class="perfil-panel">
+  <div class="header">
+    <h2>Editar Perfil</h2>
+    <button class="close-btn" (click)="cerrarPerfil()">✕</button>
+  </div>
+
+  <div class="body">
+    <form (ngSubmit)="enviarFormulario()" enctype="multipart/form-data">
+      <!-- Avatar -->
+      <div class="avatar-section">
+        <img
+          [src]="previewUrl || 'assets/default-avatar.png'"
+          class="avatar-preview"
+          alt="Avatar"
+        />
+        <input
+          type="file"
+          id="avatarInput"
+          hidden
+          (change)="onFileSelected($event)"
+        />
+        <label for="avatarInput" class="cambiar-foto-btn">Cambiar foto</label>
+      </div>
+
+      <!-- Username -->
+      <div class="form-group">
+        <label>Nombre de usuario:</label>
+        <input type="text" [(ngModel)]="username" name="username" />
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label>Teléfono:</label>
+        <input type="text" [(ngModel)]="phone" name="phone" />
+      </div>
+
+      <!-- Botones -->
+      <div class="botones">
+        <button type="submit">Guardar cambios</button>
+        <button type="button" (click)="cerrarPerfil()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="custom-toast" [class.show]="showToast">
+        {{ toastMessage }}
+      </div>

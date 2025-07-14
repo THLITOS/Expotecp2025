@@ -1,0 +1,23 @@
+<div class="comunidades-container">
+  <h2> Todas Las Comunidades</h2>
+  <div *ngIf="loading">Cargando comunidades...</div>
+  <div class="cards-wrapper"> 
+    <div *ngFor="let comunidad of comunidades" class="card">
+      <div class="image_container">
+        <img [src]="getImagenUrl(comunidad.imagenUrl)" alt="Imagen de la comunidad" />
+      </div>
+      <div class="text">
+        <span class="title">{{ comunidad.nombre }}</span>
+        <p class="descripcion">{{ comunidad.descripcion }}</p>
+      </div>
+      <div class="icons">
+        <button class="btn" (click)="unirse(comunidad._id!)">Unirse</button>
+        <button class="btn" (click)="salir(comunidad._id!)">Salir</button>
+      </div>
+    </div>
+  </div> 
+</div>
+
+<div class="custom-toast" [class.show]="showToast">
+        {{ toastMessage }}
+      </div>

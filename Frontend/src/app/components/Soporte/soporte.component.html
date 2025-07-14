@@ -1,0 +1,22 @@
+<div class="formulario">
+  <h2>Formulario de Soporte</h2>
+
+  <label>Asunto:</label>
+  <input [(ngModel)]="asunto" type="text" />
+
+<label>Categoría:</label>
+<select [(ngModel)]="categoria">
+  <option value="" disabled selected>Selecciona una opción</option>
+  <option>Problemas técnicos</option>
+  <option>Soporte errático</option>
+  <option>La página funciona mal</option>
+  <option>Otra...</option>
+</select>
+
+  <label>Descripción:</label>
+  <textarea [(ngModel)]="descripcion"></textarea>
+
+  <button (click)="enviarCorreo()">Enviar</button>
+
+  <p>{{ mensaje }}</p>
+</div>

@@ -1,0 +1,397 @@
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.card {
+  background: #2eaaaa; /* base fondo tema */
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 30px 40px;
+  width: 100%;
+  max-width: 500px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+h2 {
+  text-align: center;
+  color: #1f4e79; /* color base titulo */
+  margin-bottom: 25px;
+  transition: color 0.3s ease;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+input,
+textarea {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: border 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #1f4e79;
+  outline: none;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.file-label {
+  display: inline-block;
+  padding: 10px 15px;
+  background: #f0f0f0;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.3s ease;
+  color: #333;
+}
+
+.file-label:hover {
+  background: #e0e0e0;
+}
+
+.file-label input[type="file"] {
+  display: none;
+}
+
+.image-preview {
+  margin-top: 10px;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  transition: border-color 0.3s ease;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 4px;
+}
+
+.submit-btn {
+  background: #1f4e79;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #163d5d;
+  transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+.mensaje {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* mensajes éxito y error */
+.success {
+  background: #d4edda;
+  color: #155724;
+}
+
+.error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* textos de error en inputs */
+.error {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Temas dinámicos */
+
+:host-context(body.obscuro) .card {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+:host-context(body.obscuro) .card h2 {
+  color: #1f4e79;
+}
+
+:host-context(body.obscuro) input,
+:host-context(body.obscuro) textarea,
+:host-context(body.obscuro) .file-label,
+:host-context(body.obscuro) .image-preview {
+  background-color: #2b2b2b;
+  color: #ffffff;
+  border-color: #444;
+}
+
+:host-context(body.obscuro) .file-label {
+  color: #ddd;
+}
+
+:host-context(body.obscuro) .image-preview {
+  border-color: #555;
+}
+
+:host-context(body.obscuro) .submit-btn {
+  background-color: #00ADAD;
+  color: #000000;
+}
+
+:host-context(body.obscuro) .submit-btn:hover:not(:disabled) {
+  background-color: #66ffff;
+  color: #000000;
+}
+
+:host-context(body.azul) .card {
+  background-color: #2a4f7a;
+  color: #ffffff;
+}
+
+:host-context(body.azul) .card h2 {
+  color: #00ADAD;
+}
+
+:host-context(body.azul) input,
+:host-context(body.azul) textarea,
+:host-context(body.azul) .file-label,
+:host-context(body.azul) .image-preview {
+  background-color: #1f3a5a;
+  color: #fff;
+  border-color: #3399ff;
+}
+
+:host-context(body.azul) .file-label {
+  color: #aaddff;
+}
+
+:host-context(body.azul) .image-preview {
+  border-color: #66bbff;
+}
+
+:host-context(body.azul) .submit-btn {
+  background-color: #00bfff;
+  color: #ffffff;
+}
+
+:host-context(body.azul) .submit-btn:hover:not(:disabled) {
+  background-color: #66ccff;
+}
+
+:host-context(body.verde) .card {
+  background-color: #2a5a3a;
+  color: #ffffff;
+}
+
+:host-context(body.verde) .card h2 {
+  color: #32Cd32;
+}
+
+:host-context(body.verde) input,
+:host-context(body.verde) textarea,
+:host-context(body.verde) .file-label,
+:host-context(body.verde) .image-preview {
+  background-color: #3b6f49;
+  color: #e0f8d8;
+  border-color: #5cd65c;
+}
+
+:host-context(body.verde) .file-label {
+  color: #c1ffc1;
+}
+
+:host-context(body.verde) .image-preview {
+  border-color: #7ddd7d;
+}
+
+:host-context(body.verde) .submit-btn {
+  background-color: #32Cd32;
+  color: #ffffff;
+}
+
+:host-context(body.verde) .submit-btn:hover:not(:disabled) {
+  background-color: #74d674;
+}
+
+:host-context(body.rosa) .card {
+  background-color: #7a2a4e;
+  color: #ffffff;
+}
+
+:host-context(body.rosa) .card h2 {
+  color: #E91E63;
+}
+
+:host-context(body.rosa) input,
+:host-context(body.rosa) textarea,
+:host-context(body.rosa) .file-label,
+:host-context(body.rosa) .image-preview {
+  background-color: #9f3a6b;
+  color: #ffd0e0;
+  border-color: #e04081;
+}
+
+:host-context(body.rosa) .file-label {
+  color: #ffabc1;
+}
+
+:host-context(body.rosa) .image-preview {
+  border-color: #f06292;
+}
+
+:host-context(body.rosa) .submit-btn {
+  background-color: #E91E63;
+  color: #ffffff;
+}
+
+:host-context(body.rosa) .submit-btn:hover:not(:disabled) {
+  background-color: #f06292;
+}
+
+:host-context(body.naranja) .card {
+  background-color: #7a4a2a;
+  color: #000000;
+}
+
+:host-context(body.naranja) .card h2 {
+  color: #FF8C00;
+}
+
+:host-context(body.naranja) input,
+:host-context(body.naranja) textarea,
+:host-context(body.naranja) .file-label,
+:host-context(body.naranja) .image-preview {
+  background-color: #a66c3a;
+  color: #000000;
+  border-color: #ffb347;
+}
+
+:host-context(body.naranja) .file-label {
+  color: #000000;
+}
+
+:host-context(body.naranja) .image-preview {
+  border-color: #ffb347;
+}
+
+:host-context(body.naranja) .submit-btn {
+  background-color: #FF8C00;
+  color: #ffffff;
+}
+
+:host-context(body.naranja) .submit-btn:hover:not(:disabled) {
+  background-color: #ffb347;
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 24px 28px;
+    max-width: 100%;
+    font-size: 15px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+
+  input,
+  textarea {
+    font-size: 15px;
+    padding: 8px 10px;
+  }
+
+  .submit-btn {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .file-label {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .image-preview img {
+    max-height: 160px;
+  }
+
+  .mensaje {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  input,
+  textarea {
+    font-size: 14px;
+    padding: 7px 9px;
+  }
+
+  .submit-btn {
+    font-size: 14px;
+    padding: 9px;
+  }
+
+  .file-label {
+    font-size: 13px;
+  }
+
+  .image-preview img {
+    max-height: 140px;
+  }
+
+  .mensaje {
+    font-size: 13px;
+  }
+}

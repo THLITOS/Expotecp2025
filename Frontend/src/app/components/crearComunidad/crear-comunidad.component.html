@@ -1,0 +1,63 @@
+<div class="card-container">
+  <div class="card">
+    <h2>Crear Nueva Comunidad</h2>
+
+    <form [formGroup]="comunidadForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="form-group">
+        <input formControlName="nombre" placeholder="Nombre" required />
+        <div
+          *ngIf="
+            comunidadForm.get('nombre')?.invalid && comunidadForm.get('nombre')?.touched
+          "
+          class="error"
+        >
+          Nombre requerido (mínimo 3 caracteres)
+        </div>
+      </div>
+
+      <div class="form-group">
+        <textarea formControlName="descripcion" placeholder="Descripción" required></textarea>
+        <div
+          *ngIf="
+            comunidadForm.get('descripcion')?.invalid && comunidadForm.get('descripcion')?.touched
+          "
+          class="error"
+        >
+          Descripción requerida
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="imagen" class="file-label">
+          <span>Seleccionar Imagen</span>
+          <input
+            id="imagen"
+            type="file"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+            required
+          />
+        </label>
+        <div *ngIf="!selectedFile && comunidadForm.touched" class="error">
+          Imagen requerida
+        </div>
+        <div *ngIf="previewUrl" class="image-preview">
+          <img [src]="previewUrl" alt="Preview de la imagen" />
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="comunidadForm.invalid || !selectedFile" class="submit-btn">
+        Crear Comunidad
+      </button>
+    </form>
+
+    <div
+      *ngIf="showMensaje"
+      class="mensaje"
+      [class.success]="mensaje.includes('✅')"
+      [class.error]="mensaje.includes('❌')"
+    >
+      {{ mensaje }}
+    </div>
+  </div>
+</div>

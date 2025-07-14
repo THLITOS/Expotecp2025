@@ -1,0 +1,224 @@
+<div class="feed-container">
+
+  <!-- Modal flotante para nueva publicación -->
+  <div *ngIf="mostrarFormulario" class="modal-backdrop">
+    <div class="modal">
+      <h2 class="modal-title">Crear nueva publicación</h2>
+      <form (submit)="handleSubmit($event)" class="modal-form">
+        <label for="title">Título:</label>
+        <input type="text" name="title" id="title" required />
+
+        <label for="content">Contenido:</label>
+        <textarea name="content" id="content" rows="4" required></textarea>
+
+        <label>Comunidad:</label>
+        <select [(ngModel)]="comunidadSeleccionada" (change)="agregarComunidad()" [ngModelOptions]="{standalone: true}">
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option *ngFor="let opcion of comunidades" [ngValue]="opcion">{{ opcion.nombre }}</option>
+        </select>
+
+        <div class="chip-container">
+          <div class="chip" *ngFor="let chip of chipsSeleccionados">
+            <img [src]="chip.imagenUrl" class="chip-img" alt="icono" />
+            {{ chip.nombre }}
+            <span class="chip-close" (click)="eliminarChip(chip)">×</span>
+          </div>
+        </div>
+
+        <label for="image">URL de imagen (opcional):</label>
+        <input type="url" name="image" id="image" />
+
+        <label></label>
+        <input type="file" accept="image/*,video/*,audio/*,application/pdf" (change)="onFileSelected($event)"
+          name="archivo" />
+
+        <label *ngIf="imagenPreviewUrl">Preview:</label>
+        <img *ngIf="imagenPreviewUrl" [src]="imagenPreviewUrl" alt="Vista previa" class="preview-element"
+          height="300px" />
+
+        <label *ngIf="videoPreviewUrl">Preview:</label>
+        <video *ngIf="videoPreviewUrl" [src]="videoPreviewUrl" controls alt="Vista previa" class="preview-element">
+          ></video>
+
+        <label *ngIf="audioPreviewUrl">Preview:</label>
+        <audio *ngIf="audioPreviewUrl" [src]="audioPreviewUrl" controls class="preview-element"></audio>
+
+        <label *ngIf="pdfPreviewUrl">Preview:</label>
+        <iframe *ngIf="pdfPreviewUrl" [src]="pdfPreviewUrl" class="preview-element" height="300px"></iframe>
+
+        <div class="modal-buttons">
+          <button type="submit" class="submit-button">Publicar</button>
+          <button type="button" class="cancel-button" (click)="mostrarFormulario = false">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="filteredPosts.length === 0">
+    <div class="modal-title">
+      <h3>No se encontraron feeds que coincidan con la búsqueda.</h3>
+    </div>
+  </div>
+  <!-- Lista de publicaciones -->
+  <div class="post-card" *ngFor="let post of filteredPosts">
+    <div class="post-content">
+      <div class="post-info">
+        <span>• </span>
+        <span class="user">{{ post.user }}</span>
+        <span>• </span>
+        <span class="time">{{ post.time }}</span>
+      </div>
+
+      <h2 class="post-title">{{ post.title }}</h2>
+
+      <img *ngIf="post.image != 'undefined'" [src]="post.image" alt="Imagen de la publicación" class="post-image" />
+
+      <img *ngIf="post.archivoTipo?.startsWith('image/')" [src]="post.archivo" alt="Imagen de la publicación"
+        class="post-image" />
+
+      <video *ngIf="post.archivoTipo?.startsWith('video/')" [src]="post.archivo" alt="Video de la publicacion"
+        class="preview-element" controls width="400"></video>
+
+      <audio *ngIf="post.archivoTipo?.startsWith('audio/')" [src]="post.archivo" alt="Audio de la publicacion"
+        class="preview-element" controls>
+      </audio>
+
+      <iframe *ngIf="post.archivoTipo === 'application/pdf'" [src]="post.archivo" alt="PDF de la publicacion"
+        class="preview-element" height="500px">
+      </iframe>
+
+      <p class="post-text">
+        {{ post.content }}
+      </p>
+
+      <div class="post-actions">
+        <button class="action-button" (click)="darLike(post)" [disabled]="post.isdisLike === true">
+          <svg xmlns="http://www.w3.org/2000/svg" [class.liked]="post.isLike" width="24" height="24" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-heart-icon lucide-heart">
+            <path
+              d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+          </svg>
+          <span class="action-count">{{ post.likes }}</span>
+        </button>
+
+        <button class="action-button" (click)="darDisLike(post)" [disabled]="post.isLike === true">
+          <svg xmlns="http://www.w3.org/2000/svg" [class.liked]="post.isdisLike" width="24" height="24"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" class="lucide lucide-heart-crack-icon lucide-heart-crack">
+            <path
+              d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+            <path d="m12 13-1-1 2-2-3-3 2-2" />
+          </svg>
+          <span class="action-count">{{ post.dislike }}</span>
+        </button>
+
+        <button class="action-button" (click)="mostrarFormularioComentario(post)">
+          <svg [class.liked]="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-message-circle-icon lucide-message-circle">
+            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+          </svg>
+          <span class="action-count">{{ post.comentarios?.length || 0 }}</span>
+        </button>
+
+
+        <button class="action-button" (click)="darSaved(post)">
+          <svg [class.liked]="post.isSaved" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" class="lucide lucide-bookmark-icon lucide-bookmark">
+            <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
+          </svg>
+        </button>
+
+        <div class="share-container">
+          <button class="action-button" (click)="toggleShareMenu(post)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="lucide lucide-share2-icon lucide-share-2">
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
+              <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
+            </svg>
+            <span class="share-label">Compartir</span>
+          </button>
+
+          <div class="share-menu" [class.show]="post.showShareMenu">
+            <button class="menu-item" (click)="copyLink(post)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-link-icon lucide-link">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+              Copiar enlace
+            </button>
+          </div>
+        </div>
+
+        <button class="action-button delete-button" (click)="confirmarEliminar(post.id)"
+          *ngIf="post.userId == currentUser">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-trash2-icon lucide-trash-2">
+            <path d="M3 6h18" />
+            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+            <line x1="10" x2="10" y1="11" y2="17" />
+            <line x1="14" x2="14" y1="11" y2="17" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="confirm-modal-overlay" [class.show]="showConfirmModal">
+        <div class="confirm-modal-content">
+          <h3>¿Estás seguro?</h3>
+          <p>Esta acción no se puede deshacer. ¿Realmente deseas eliminar {{ this.mensajeConfirmacion }}?</p>
+          <div class="modal-actions">
+            <button class="cancel-button" (click)="cancelarEliminacion()">Cancelar</button>
+            <button class="confirm-button" (click)="ejecutarEliminacion()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="custom-toast" [class.show]="showToast">
+        {{ toastMessage }}
+      </div>
+
+      <div *ngIf="post.mostrarFormComentario" class="comentario-formulario">
+        <textarea [(ngModel)]="nuevoMensaje[post.id]" placeholder="Escribe un comentario..." rows="3"
+          class="comentario-textarea"></textarea>
+
+        <button (click)="enviarComentario(post, nuevoMensaje[post.id])" class="comentario-enviar">
+          ENVIAR
+        </button>
+      </div>
+
+      <div>
+        <!-- Lista de comentarios existentes -->
+        <div *ngIf="post.comentarios" class="comentario-lista">
+          <div *ngFor="let comentario of post.comentarios" class="comentario-item">
+            <strong>{{ comentario.usuario }}</strong> •
+            <small>{{ comentario.fecha }}</small>
+            <p>{{ comentario.mensaje }}</p>
+
+            <!-- Botón de eliminar -->
+            <button *ngIf="comentario.usuarioId == currentUser" class="btn-eliminar" (click)="confirmarEliminarComentario(comentario.id)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-trash-2">
+                <path d="M3 6h18" />
+                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                <line x1="10" x2="10" y1="11" y2="17" />
+                <line x1="14" x2="14" y1="11" y2="17" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

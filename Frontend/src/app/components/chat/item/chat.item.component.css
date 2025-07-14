@@ -1,0 +1,88 @@
+:host-context(body.azul) .chat-panel-header {
+  background-color: #1a2f4d;
+  color: white;
+}
+
+:host-context(body.azul) .chat-item:hover {
+   background-color: #2a4f7a;
+   color: white;
+}
+
+:host-context(body.verde) .chat-panel-header {
+  background-color: #1a3a25;
+  color: white;
+}
+
+:host-context(body.verde) .chat-item:hover {
+   background-color: #2a5a3a;
+   color: white;
+}
+
+:host-context(body.rosa) .chat-panel-header {
+  background-color: #4d1a31;
+  color: white;
+}
+
+:host-context(body.rosa) .chat-item:hover {
+   background-color: #7a2a4e;
+   color: white;
+}
+
+:host-context(body.naranja) .chat-panel-header {
+  background-color: #4d2f1a;
+  color: #000000;
+}
+
+:host-context(body.naranja) .chat-item:hover {
+   background-color: #7a4a2a;
+   color: #000000;
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-bottom: 5px;
+}
+
+.chat-item:hover {
+  background-color: #3a3b3c;
+}
+
+.chat-avatar-wrapper {
+  position: relative;
+  margin-right: 12px;
+}
+
+.chat-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat-info {
+  flex-grow: 1;
+}
+
+.chat-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: #e4e6eb;
+}
+
+.chat-last-message {
+  font-size: 14px;
+  color: #b0b3b8;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.chat-last-message .separator {
+  font-size: 18px;
+  line-height: 1;
+}

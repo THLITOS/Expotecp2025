@@ -1,0 +1,38 @@
+<div class="parentDiv">
+  <div class="main">  	
+    <input type="checkbox" id="chk" hidden>
+
+    <div class="signup">
+      <form [formGroup]="signupForm" (ngSubmit)="onRegister()">
+        <label for="chk">Registrar</label>
+        <input type="text" formControlName="username" placeholder="User name" required maxlength="50" (paste)="disablePaste($event)">
+        
+        <input type="email" formControlName="email" placeholder="Email" required maxlength="50" (paste)="disablePaste($event)" (blur)="validateEmail()">
+
+        <input type="tel" formControlName="phone" placeholder="Phone number" required maxlength="8" (keypress)="validatePhoneInput($event)" (paste)="disablePaste($event)">
+        
+        <input type="password" formControlName="password" placeholder="Password" maxlength="25" (paste)="disablePaste($event)">
+
+        <!-- Mensaje de registro -->
+        <div class="message success-message" *ngIf="registerMessage">{{ registerMessage }}</div>
+
+        <button type="submit" [disabled]="!signupForm.valid">Registrar</button>
+      </form>
+    </div>
+
+    <div class="login">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <label for="chk">Login</label>
+        <input type="email" formControlName="email" placeholder="Email" required maxlength="50" (paste)="disablePaste($event)" (blur)="validateLoginEmail()">
+
+        <input type="password" formControlName="password" placeholder="Password" required maxlength="25" (paste)="disablePaste($event)">
+
+        <button type="submit" [disabled]="!loginForm.valid">LOGIN</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="custom-toast" [class.show]="showToast">
+  {{ toastMessage }}
+</div>

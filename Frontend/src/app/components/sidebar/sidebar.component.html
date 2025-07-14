@@ -1,0 +1,72 @@
+<div class="sidebar" [class.expanded]="isExpanded">
+  <button class="toggle-button" (click)="toggleSidebar()">
+    <span>{{ isExpanded ? '«' : '»' }}</span>
+  </button>
+
+  <nav>
+    <!-- Inicio -->
+    <a
+      class="nav-item"
+      (click)="selectSection('feed')"
+      tabindex="0"
+      role="button"
+      [class.active]="selectedSection === 'feed'"
+    >
+      <!-- icono -->
+      <img class="icon" src="/inicio.png" alt="Inicio" />
+      <span *ngIf="isExpanded">Inicio</span>
+    </a>
+
+    <!-- Comunidades -->
+    <a
+      class="nav-item"
+      (click)="selectSection('comunidades')"
+      tabindex="0"
+      role="button"
+      [class.active]="selectedSection === 'comunidades'"
+    >
+      <!-- icono -->
+      <img class="icon" src="/comunidadp.png" alt="Comunidades" />
+      <span *ngIf="isExpanded">Comunidades</span>
+    </a>
+
+    <!-- Crear Comunidad -->
+    <a
+      class="nav-item"
+      (click)="selectSection('crearcomunidad')"
+      tabindex="0"
+      role="button"
+      [class.active]="selectedSection === 'crearcomunidad'"
+    >
+      <!-- icono -->
+      <img class="icon" src="/crearcomunidadp.png" alt="Crear Comunidad" />
+      <span *ngIf="isExpanded">Crear Comunidad</span>
+    </a>
+
+    <!-- Soporte -->
+    <a
+      class="nav-item"
+      (click)="selectSection('soporte')"
+      tabindex="0"
+      role="button"
+      [class.active]="selectedSection === 'soporte'"
+    >
+      <!-- icono -->
+      <img class="icon" src="/soportep.png" alt="Soporte" />
+      <span *ngIf="isExpanded">Soporte</span>
+    </a>
+
+    <!-- Tus Comunidades -->
+    <a
+      class="nav-item"
+      (click)="selectSection('TusComunidades')"
+      tabindex="0"
+      role="button"
+      [class.active]="selectedSection === 'TusComunidades'"
+    >
+      <!-- icono -->
+      <img class="icon" src="/tuscomunidadesp.png" alt="Tus Comunidades" />
+      <span *ngIf="isExpanded">Tus Comunidades</span>
+    </a>
+  </nav>
+</div>

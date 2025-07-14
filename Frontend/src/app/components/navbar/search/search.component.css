@@ -1,0 +1,229 @@
+ #search-container {
+ display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px; 
+  padding: 0;
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto; 
+}
+
+.input {
+  width: 100%;
+  height: 54px;
+  padding: 0 20px 0 52px; /* espacio para el ícono */
+  background-color: #f4f6fa; /* gris claro, estilo amigo */
+  border: 2px solid #d0d4dc;
+  border-radius: 40px;
+  color: #333;
+  font-size: 17px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  font-family: inherit; /* que tome la fuente global */
+}
+
+.input::placeholder {
+  color: #888;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #00ADAD;
+  box-shadow: 0 0 0 4px rgba(0, 173, 173, 0.2);
+}
+
+#main {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+}
+
+#input-mask {
+  pointer-events: none;
+  width: 90px;
+  height: 16px;
+  position: absolute;
+  background: linear-gradient(90deg, transparent, #05071b);
+  top: 13px;
+  left: 60px;
+}
+
+#cosmic-glow {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 40px;
+  background: radial-gradient(circle at 30% 50%, rgba(0, 173, 173, 0.15), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#main:hover > #cosmic-glow {
+  opacity: 0;
+}
+
+.stardust,
+.cosmic-ring,
+.starfield,
+.nebula {
+  max-height: 50px; /* menos alto */
+  max-width: 314px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+  z-index: -1;
+  border-radius: 12px;
+  filter: blur(3px);
+}
+
+
+.stardust {
+  max-height: 45px;
+  max-width: 307px;
+  border-radius: 10px;
+  filter: blur(2px);
+}
+
+.cosmic-ring {
+  max-height: 42px;
+  max-width: 303px;
+  border-radius: 11px;
+  filter: blur(0.5px);
+}
+
+.starfield {
+  max-height: 48px;
+  max-width: 312px;
+}
+
+.nebula {
+  max-height: 90px;
+  max-width: 354px;
+  filter: blur(20px);
+  opacity: 0.4;
+}
+
+.wormhole-border {
+  height: 32px; /* menos alto */
+  width: 30px;
+  position: absolute;
+  overflow: hidden;
+  top: 6px;
+  right: 6px;
+  border-radius: 10px;
+}
+
+#search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  fill: #888;
+  pointer-events: none;
+  transition: fill 0.3s;
+}
+
+.input:focus + #search-icon,
+.input:focus ~ #search-icon {
+  fill: #00ADAD;
+}
+
+.input:hover ~ #cosmic-glow {
+  opacity: 1;
+}
+
+#input-mask,
+.stardust,
+.cosmic-ring,
+.starfield,
+.nebula,
+.wormhole-border {
+  display: none;
+}
+
+
+@keyframes rotate {
+  100% {
+    transform: translate(-50%, -50%) rotate(450deg);
+  }
+}
+
+@media (max-width: 768px) {
+  #search-container {
+    height: auto;
+    padding: 0 10px;
+    max-width: 100%;
+  }
+
+  .input {
+    height: 50px;
+    padding: 0 16px 0 48px;
+    font-size: 16px;
+  }
+
+  #search-icon {
+    width: 20px;
+    height: 20px;
+    left: 14px;
+  }
+
+  #cosmic-glow {
+    border-radius: 30px;
+  }
+
+  .stardust,
+  .cosmic-ring,
+  .starfield,
+  .nebula {
+    max-height: 45px;
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .wormhole-border {
+    top: 5px;
+    right: 5px;
+    width: 28px;
+    height: 28px;
+  }
+
+  #input-mask {
+    left: 50px;
+    top: 12px;
+    width: 80px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .input {
+    height: 46px;
+    padding: 0 14px 0 44px;
+    font-size: 15px;
+  }
+
+  #search-icon {
+    width: 18px;
+    height: 18px;
+    left: 12px;
+  }
+
+  .wormhole-border {
+    width: 26px;
+    height: 26px;
+    top: 4px;
+    right: 4px;
+  }
+
+  .nebula {
+    filter: blur(15px);
+    opacity: 0.3;
+  }
+}

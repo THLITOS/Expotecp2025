@@ -1,0 +1,13 @@
+<div class="chat-item" (click)="onChatSelected()">
+  <div class="chat-avatar-wrapper">
+    <img [src]="chat.avatarUrl" alt="{{ chat.name }}" class="chat-avatar">
+  </div>
+  <div class="chat-info">
+    <div class="chat-name">{{ chat.name }}</div>
+    <div class="chat-last-message">
+      <span>{{ chat.lastMessage }}</span>
+      <span class="separator">·</span>
+      <span class="time-ago">{{ chat.timeAgo }}</span>
+    </div>
+  </div>
+</div>

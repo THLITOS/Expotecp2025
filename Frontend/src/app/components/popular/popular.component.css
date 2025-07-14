@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  background-color: lightblue; /* o el color que quieras */
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+}

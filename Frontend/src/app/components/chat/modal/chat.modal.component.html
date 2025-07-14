@@ -1,0 +1,27 @@
+<div class="modal-overlay" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Nuevo mensaje</h3>
+      <button class="close-button" (click)="onClose()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="search-input-container">
+        <label for="para-input">Para:</label>
+        <input id="para-input" type="text" placeholder="Escribe un nombre..." [(ngModel)]="searchTerm"
+          (input)="onSearchChange(searchTerm)" />
+      </div>
+
+      <div class="user-list-container">
+        <div *ngIf="filteredUsers.length === 0 && searchTerm.length > 0" class="no-results">
+          No se encontraron usuarios.
+        </div>
+        <div *ngFor="let user of filteredUsers" class="user-item" (click)="selectUser(user)">
+          <img
+            [src]="user.avatarUrl || 'https://static.vecteezy.com/system/resources/previews/013/446/485/non_2x/colored-design-icon-of-user-chat-vector.jpg'"
+            alt="Avatar" class="avatar">
+          <span>{{ user.username }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

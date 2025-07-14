@@ -1,0 +1,45 @@
+<nav class="navbar">
+  <!-- Logo que llama a irAInicio() -->
+  <a (click)="irAInicio()" class="logo" style="cursor: pointer;">
+    <img src="logos.png" alt="Logo de la app" />
+  </a>
+
+  <app-search></app-search>
+
+  <div class="navbar-right">
+    <!-- Botón de perfil -->
+    <button class="icon-button" aria-label="Foto perfil" (click)="togglePerfil()">
+      <ng-container *ngIf="avatarUrl; else defaultIcon">
+        <img
+          [src]="avatarUrl"
+          alt="Foto de perfil"
+          class="avatar-navbar"
+          (error)="avatarUrl = null"
+        />
+      </ng-container>
+      <ng-template #defaultIcon>
+        <img src="perfil.png" alt="Icono perfil" class="icon-img" />
+      </ng-template>
+    </button>
+
+    <!-- Botón de crear publicación -->
+    <button class="icon-button" aria-label="Crear nuevo" (click)="abrirFormulario()">
+      <img src="crearpost.png" alt="Icono crear publicación" class="icon-img" />
+    </button>
+
+    <!-- Botón de chat -->
+    <button class="icon-button" aria-label="Mensajes" (click)="toggleChat()">
+      <img src="chat.png" alt="Icono chat" class="icon-img" />
+    </button>
+
+    <!-- Botón de personalización -->
+    <button class="icon-button" aria-label="Tema" (click)="mostrarModal = true">
+      <img src="themes.png" alt="Icono tema" class="icon-img" />
+    </button>
+
+    <!-- Paneles -->
+    <app-side-chat-panel [class]="{'chat-open': isChatOpen}" (closeChat)="toggleChat()"></app-side-chat-panel>
+    <app-theme *ngIf="mostrarModal" (close)="mostrarModal = false"></app-theme>
+    <app-editar-perfil *ngIf="mostrarPerfil" (close)="togglePerfil()"></app-editar-perfil>
+  </div>
+</nav>

@@ -1,0 +1,23 @@
+<div class="modal" *ngIf="visible">
+  <div class="modal-content">
+    <h3>Elige un tema:</h3>
+    <div class="color-options">
+      <button
+        *ngFor="let tema of temas"
+        class="Btn"
+        [ngStyle]="{ 'background-color': tema.fondo, color: tema.texto }"
+        (click)="seleccionarTema(tema)"
+      >
+        <span class="svgContainer">
+          <img
+            src="favicon.ico"
+            alt="Logo"
+            class="logo"
+          />
+        </span>
+        <span class="BG"></span>
+      </button>
+    </div>
+    <button class="cerrar" (click)="cerrar()">Cerrar</button>
+  </div>
+</div>

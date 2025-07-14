@@ -1,0 +1,43 @@
+<div class="feed-container">
+
+  <!-- Lista de publicaciones -->
+  <div class="post-card" *ngFor="let post of posts">
+    <div class="post-content">
+      <div class="post-info">
+        <span>• </span>
+        <span class="user">{{ post.user }}</span>
+        <span>• </span>
+        <span class="time">{{ post.time }}</span>
+      </div>
+
+      <h2 class="post-title">{{ post.title }}</h2>
+
+      <div class="chip-container-comunidades">
+        <div class="chip-comunidades" *ngFor="let texto of post.comunidades">
+            <img src="https://img.icons8.com/?size=100&id=66724&format=png&color=000000" alt="icono" class="chip-img-comunidades" />
+            {{ texto }}
+        </div>
+        </div>
+
+      <img *ngIf="post.image != 'undefined'" [src]="post.image" alt="Imagen de la publicación" class="post-image" />
+
+      <img *ngIf="post.archivoTipo?.startsWith('image/')" [src]="post.archivo" alt="Imagen de la publicación"
+        class="post-image" />
+
+      <video *ngIf="post.archivoTipo?.startsWith('video/')" [src]="post.archivo" alt="Video de la publicacion"
+        class="preview-element" controls width="400"></video>
+
+      <audio *ngIf="post.archivoTipo?.startsWith('audio/')" [src]="post.archivo" alt="Audio de la publicacion"
+        class="preview-element" controls>
+      </audio>
+
+      <iframe *ngIf="post.archivoTipo === 'application/pdf'" [src]="post.archivo" alt="PDF de la publicacion"
+        class="preview-element" height="500px">
+      </iframe>
+
+      <p class="post-text">
+        {{ post.content }}
+      </p>
+    </div>
+  </div>
+</div>
