@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EditarPerfilService {
-  private baseUrl = 'http://localhost:5000/api/usuarios';
+  private baseUrl = 'https://expotecp2025.onrender.com/api/usuarios';
 
   constructor(private http: HttpClient) {}
 

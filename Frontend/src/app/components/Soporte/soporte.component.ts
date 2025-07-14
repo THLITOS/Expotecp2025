@@ -32,7 +32,7 @@ export class SoporteComponent {
         descripcion: this.descripcion
       };
 
-      this.http.post('http://localhost:5000/api/email/send-support-email', datos)
+      this.http.post('https://expotecp2025.onrender.com/api/email/send-support-email', datos)
         .subscribe({
           next: () => { 
             this.mensaje = '✅ Correo enviado correctamente';

@@ -46,7 +46,7 @@ export class EditarPerfilComponent implements OnInit {
         this.phone = usuario.phone || '';
 
         if (usuario.avatar) {
-          this.previewUrl = `http://localhost:5000/${usuario.avatar}`;
+          this.previewUrl = `https://expotecp2025.onrender.com/${usuario.avatar}`;
         } else {
           this.previewUrl = null;
         }

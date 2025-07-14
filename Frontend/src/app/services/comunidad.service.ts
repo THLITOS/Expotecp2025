@@ -15,7 +15,7 @@ export interface Comunidad {
   providedIn: 'root',
 })
 export class ComunidadService {
-  private apiUrl = 'http://localhost:5000/api/comunidades';
+  private apiUrl = 'https://expotecp2025.onrender.com/api/comunidades';
 
   constructor(private http: HttpClient) {}
 

@@ -58,7 +58,7 @@ export class NavbarComponent {
           // supongo que avatar es la URL o path para la imagen
           this.avatarUrl = usuario.avatar.startsWith('http')
             ? usuario.avatar
-            : `http://localhost:5000/${usuario.avatar}`;
+            : `https://expotecp2025.onrender.com/${usuario.avatar}`;
         }
       },
       error: (err) => {

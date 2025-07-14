@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class FeedService {
-  private apiUrl = 'http://localhost:5000/api';
+  private apiUrl = 'https://expotecp2025.onrender.com/api';
 
   private abrirFormularioSource = new BehaviorSubject<boolean>(false);
   formulario$ = this.abrirFormularioSource.asObservable();

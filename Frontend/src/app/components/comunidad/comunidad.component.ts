@@ -69,7 +69,7 @@ export class ComunidadComponent implements OnInit {
   getImagenUrl(imagenUrl?: string): string {
     if (!imagenUrl) return 'assets/default-image.jpg'; // Imagen por defecto local
     if (imagenUrl.startsWith('http')) return imagenUrl;
-    return `http://localhost:5000/uploads/${imagenUrl}`;
+    return `https://expotecp2025.onrender.com/uploads/${imagenUrl}`;
   }
 
   showCustomToast(message: string, duration: number = 3000): void {
