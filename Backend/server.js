@@ -12,12 +12,24 @@ dotenv.config();
 const app = express();
 
 // Middleware para CORS
+const allowedOrigins = [
+  'http://localhost:4200',
+  'https://expotecp2025f.vercel.app'
+];
+
 app.use(cors({
-  origin: 'http://localhost:4200',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
 
 // Middleware para JSON
 app.use(express.json());
