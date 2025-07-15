@@ -97,6 +97,7 @@ export class FeedComponent implements OnInit {
       });
     });
 
+    this.filteredPosts = [...this.posts];
 
     this.feedService.formulario$.subscribe((abrir) => {
       this.mostrarFormulario = abrir;
@@ -117,7 +118,7 @@ export class FeedComponent implements OnInit {
       },
     });
 
-    this.filteredPosts = [...this.posts];
+    
     this.searchSubscription = this.searchService.searchTerm$
       .pipe(
         debounceTime(300),
