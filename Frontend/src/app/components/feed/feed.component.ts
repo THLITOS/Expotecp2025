@@ -95,10 +95,10 @@ export class FeedComponent implements OnInit {
         this.getComentariosByPublicacion(post);
         this.getArchivos(post.id, post.archivoTipo);
       });
+      this.filteredPosts = [...this.posts];
+      console.log(this.filteredPosts);
     });
 
-    this.filteredPosts = [...this.posts];
-    console.log(this.filteredPosts);
 
     this.feedService.formulario$.subscribe((abrir) => {
       this.mostrarFormulario = abrir;
