@@ -98,7 +98,7 @@ export class FeedComponent implements OnInit {
     });
 
     this.filteredPosts = [...this.posts];
-    console.log(this.filterPosts);
+    console.log(this.filteredPosts);
 
     this.feedService.formulario$.subscribe((abrir) => {
       this.mostrarFormulario = abrir;
