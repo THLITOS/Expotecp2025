@@ -96,7 +96,6 @@ export class FeedComponent implements OnInit {
         this.getArchivos(post.id, post.archivoTipo);
       });
       this.filteredPosts = [...this.posts];
-      console.log(this.filteredPosts);
     });
 
 

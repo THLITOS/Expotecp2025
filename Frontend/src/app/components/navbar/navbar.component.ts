@@ -29,7 +29,7 @@ export class NavbarComponent {
   mostrarModal: boolean = false;
   mostrarPerfil: boolean = false;
 
-  avatarUrl: string | null = null; // <-- acá guardamos la URL de la foto
+  avatarUrl: string | null = null; 
 
   constructor(
     private feedService: FeedService,
@@ -54,11 +54,12 @@ export class NavbarComponent {
 
     this.usuariosService.getUsuarioPorId(idUsuario).subscribe({
       next: (usuario) => {
-        if (usuario.avatar) {
-          // supongo que avatar es la URL o path para la imagen
-          this.avatarUrl = usuario.avatar.startsWith('http')
-            ? usuario.avatar
-            : `https://expotecp2025.onrender.com/${usuario.avatar}`;
+        if (usuario.file && usuario.file.data) {
+          const typedArray = new Uint8Array(usuario.file.data);
+          const blob = new Blob([typedArray], { type: 'image/jpeg' }); 
+          this.avatarUrl = URL.createObjectURL(blob);
+        } else {
+          this.avatarUrl = null;
         }
       },
       error: (err) => {

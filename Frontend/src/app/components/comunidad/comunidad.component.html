@@ -4,7 +4,7 @@
   <div class="cards-wrapper"> 
     <div *ngFor="let comunidad of comunidades" class="card">
       <div class="image_container">
-        <img [src]="getImagenUrl(comunidad.imagenUrl)" alt="Imagen de la comunidad" />
+        <img [src]="getFileUrl(comunidad.file)" alt="Imagen de la comunidad" />
       </div>
       <div class="text">
         <span class="title">{{ comunidad.nombre }}</span>

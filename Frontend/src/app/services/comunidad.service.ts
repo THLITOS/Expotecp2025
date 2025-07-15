@@ -8,7 +8,8 @@ export interface Comunidad {
   descripcion: string;
   creadorId: string;
   miembros?: string[];
-  imagenUrl?: string; // URL imagen
+  imagenUrl?: string; 
+  file?: any;
 }
 
 @Injectable({

@@ -22,12 +22,12 @@ exports.getUsuarioById = async (req, res) => {
   }
 };
 
-// ✅ ACTUALIZAR PERFIL DE USUARIO
+// ACTUALIZAR PERFIL DE USUARIO
 exports.updateUsuario = async (req, res) => {
   try {
     const { idUsuario } = req.params;
     const { username, email, phone, newPassword } = req.body;
-    const avatar = req.file ? req.file.path : null;
+    const file = req.file?.buffer || null;
 
     const usuario = await Usuario.findById(idUsuario);
     if (!usuario) {
@@ -38,14 +38,15 @@ exports.updateUsuario = async (req, res) => {
     if (username) usuario.username = username;
     if (email) usuario.email = email;
     if (phone) usuario.phone = phone;
+    if (file) usuario.file = file;
 
     // Si viene imagen, guardar nueva y borrar la anterior si existe
-    if (avatar) {
+    /*if (avatar) {
       if (usuario.avatar && fs.existsSync(usuario.avatar)) {
         fs.unlinkSync(usuario.avatar); // borrar anterior
       }
       usuario.avatar = avatar;
-    }
+    }*/
 
     // Si viene nueva contraseña, encriptarla
     if (newPassword) {

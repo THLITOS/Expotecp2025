@@ -1,39 +1,40 @@
 const mongoose = require('mongoose');
 
 const comunidadSchema = new mongoose.Schema({
-  nombre: { 
-    type: String, 
+  nombre: {
+    type: String,
     required: true,
     trim: true,
     maxlength: 50
   },
-  descripcion: { 
-    type: String, 
+  descripcion: {
+    type: String,
     required: true,
     trim: true,
     maxlength: 500
   },
-  creadorId: { 
-    type: mongoose.Schema.Types.ObjectId, 
+  creadorId: {
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Usuario',
-    required: true 
+    required: true
   },
-  miembros: [{ 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Usuario' 
+  miembros: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Usuario'
   }],
-  imagenUrl: { 
+  imagenUrl: {
     type: String,
     trim: true
   },
-  fechaCreacion: { 
-    type: Date, 
-    default: Date.now 
-  }
-}, { 
+  fechaCreacion: {
+    type: Date,
+    default: Date.now
+  },
+  file: { type: Buffer },
+}, {
   timestamps: true,
   toJSON: { virtuals: true },
-  toObject: { virtuals: true } 
+  toObject: { virtuals: true }
 });
 
 // Índices para mejor rendimiento

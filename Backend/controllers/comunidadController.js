@@ -19,16 +19,18 @@ exports.crearComunidad = async (req, res) => {
       return res.status(400).json({ error: 'Solo puedes crear hasta 3 comunidades' });
     }
 
-    // ✅ Construir URL completa de la imagen
+   /*
     const imagenUrl = req.file
       ? `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`
-      : null;
+      : null;*/
+
+      const file = req.file?.buffer || null;
 
     const comunidad = new Comunidad({
       nombre,
       descripcion,
       creadorId,
-      imagenUrl
+      file
     });
 
     await comunidad.save();

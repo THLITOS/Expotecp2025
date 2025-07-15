@@ -18,7 +18,7 @@ export class ComunidadComponent implements OnInit {
   toastMessage: string = '';
   private toastTimer: any;
 
-  constructor(private comunidadService: ComunidadService) {}
+  constructor(private comunidadService: ComunidadService) { }
 
   ngOnInit() {
     this.loadComunidades();
@@ -29,7 +29,7 @@ export class ComunidadComponent implements OnInit {
     this.comunidadService.obtenerComunidades().subscribe({
       next: (data) => {
         this.comunidades = data;
-        console.log('📦 Comunidades:', this.comunidades); 
+        console.log('📦 Comunidades:', this.comunidades);
         this.loading = false;
       },
       error: () => {
@@ -65,11 +65,21 @@ export class ComunidadComponent implements OnInit {
     });
   }
 
-  // 👇 Utilidad para mostrar correctamente la imagen
+  // Utilidad para mostrar correctamente la imagen
   getImagenUrl(imagenUrl?: string): string {
-    if (!imagenUrl) return 'assets/default-image.jpg'; // Imagen por defecto local
+    if (!imagenUrl) return 'assets/default-image.jpg'; 
     if (imagenUrl.startsWith('http')) return imagenUrl;
-    return `https://expotecp2025.onrender.com/uploads/${imagenUrl}`;
+    return `https://expotecp2025.onrender.com/api/${imagenUrl}`;
+  }
+
+  getFileUrl(file?: any): any {
+    if (file && file.data) {
+      const typedArray = new Uint8Array(file.data);
+      const blob = new Blob([typedArray], { type: 'image/jpeg' });
+      return URL.createObjectURL(blob);
+    } else {
+      return null;
+    }
   }
 
   showCustomToast(message: string, duration: number = 3000): void {

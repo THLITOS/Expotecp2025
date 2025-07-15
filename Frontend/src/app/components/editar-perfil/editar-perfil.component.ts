@@ -28,7 +28,7 @@ export class EditarPerfilComponent implements OnInit {
   constructor(
     private editarPerfilService: EditarPerfilService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit() {
     const idUsuario = this.authService.getToken()
@@ -45,8 +45,10 @@ export class EditarPerfilComponent implements OnInit {
         this.username = usuario.username || '';
         this.phone = usuario.phone || '';
 
-        if (usuario.avatar) {
-          this.previewUrl = `https://expotecp2025.onrender.com/${usuario.avatar}`;
+        if (usuario.file && usuario.file.data) {
+          const typedArray = new Uint8Array(usuario.file.data);
+          const blob = new Blob([typedArray], { type: 'image/jpeg' }); 
+          this.previewUrl = URL.createObjectURL(blob);
         } else {
           this.previewUrl = null;
         }
